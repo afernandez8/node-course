@@ -1,4 +1,4 @@
-/* eslint func-style: 0, one-var: 0 */
+/* eslint func-style: 0, one-var: 0, no-param-reassign: 0 */
 
 const teams = [
   {
@@ -177,11 +177,11 @@ function shuffle(a) {
 }
 
 function getTeamsForBox(box) {
-  // completar
+  return teams.filter(team => team.box === box);
 }
 
 function getTeamsForGroup(group) {
-  // completar
+  return teams.filter(team => team.group === group);
 }
 
 
@@ -195,7 +195,15 @@ function simulate() {
   const groups = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
   for (let box = 1; box <= 4; box++) {
-    // completar
+    
+    const teamsShuffled = shuffle(getTeamsForBox(box));
+    
+    teamsShuffled.forEach((team, i) => {
+      if (box === 1) {
+        i++;
+      }
+      team.group = groups[i];
+    });
   }
 
   console.log("Resultados del sorteo:");
