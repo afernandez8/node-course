@@ -7,5 +7,6 @@ function longComputation() {
 }
 
 process.on("message", () => {
-  // write your code here
+  const result = longComputation();
+  process.send(result);
 });
