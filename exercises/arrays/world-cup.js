@@ -1,4 +1,4 @@
-/* eslint func-style: 0, one-var: 0, no-param-reassign: 0 */
+/* eslint func-style: 0, one-var: 0 */
 
 const teams = [
   {
@@ -199,10 +199,7 @@ function simulate() {
     const teamsShuffled = shuffle(getTeamsForBox(box));
     
     teamsShuffled.forEach((team, i) => {
-      if (box === 1) {
-        i++;
-      }
-      team.group = groups[i];
+      team.group = groups[i + (box === 1 ? 1 : 0)];
     });
   }
 
