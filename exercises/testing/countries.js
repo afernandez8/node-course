@@ -3,14 +3,34 @@
 // Esto permite que sea fácilmente testeable ya que puedo pasar un objecto "mockeado" de countryInfo.
 // Patrón: dependency injection, inversion of control.
 
+function validateResponse(data) {
+  return data && data.code && data.name ? data : null;
+}
+
 module.exports = (countryInfo) => {
 
   function getByCode(code) {
-    // Your promise code here!
+    return new Promise((resolve, reject) => {
+      countryInfo.getCountryInfo(code, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(validateResponse(data));
+        }
+      });
+    });
   }
 
   function getByName(name) {
-    // Your promise code here!
+    return new Promise((resolve, reject) => {
+      countryInfo.getCountryInfoByName(name, (err, data) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(validateResponse(data));
+        }
+      });
+    });
   }
   
   return {
